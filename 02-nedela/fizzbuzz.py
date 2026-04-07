@@ -1,26 +1,3 @@
-
-
-for N in range(1,16):
-    if N % 3 == 0 and N % 5 == 0 and N % 7 == 0:
-        print("FizzBuzzJazz", end=" ")
-    elif N % 3 == 0 and N % 7 == 0:
-        print("FizzJazz", end=" ")
-    elif N % 5 == 0 and N % 7 == 0:
-        print("BuzzJazz", end=" ")
-    elif N % 3 == 0 and N % 5 == 0:
-        print("FizzBuzz", end=" ")
-    elif N % 3 == 0:
-        print("Fizz", end=" ")
-    elif N % 5 == 0:
-        print("Buzz", end=" ")
-    elif N % 7 == 0:
-        print("Jazz", end=" ")   
-    else:
-        print(N, end=" ")
-
-
-
-
 import sys
     
 if len(sys.argv) < 2:
