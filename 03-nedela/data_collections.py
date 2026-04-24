@@ -4,6 +4,11 @@ naudas_vienibas.remove(25)
 naudas_vienibas.pop(5)
 naudas_vienibas.insert(2,20)
 print(naudas_vienibas)
+print(naudas_vienibas[:3])
+print(naudas_vienibas[-2:])
+print(naudas_vienibas[::2])
+
+
 kopsumma = 0
 skaits = 0
 for skaitlis in naudas_vienibas:
