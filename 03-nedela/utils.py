@@ -1,3 +1,32 @@
+def capitalize(text):
+    """
+    Pārvērš teksta pirmo burtu par lielo burtu un pārējos par maziem burtiem
+
+    Args:
+        text (str): teksts, kuru pārvērst
+
+    Returns:
+        str: teksts ar pirmo lielo burtu un pārējiem maziem burtiem
+
+    Raises:
+        ValueError: ja ievadīti cipari nevis teksts
+
+    Example:
+        >>> capitalize("sanita")
+        'Sanita'
+        >>> capitalize("sANITA")
+        'Sanita'
+    """
+
+    if not isinstance(text, str):
+        raise ValueError("Ievadi tekstu!")
+
+    if len(text) == 0:
+        return ""
+
+    return text[0].upper() + text[1:].lower()
+
+
 def truncate(text, max_len=20):
     """
     Saīsina tekstu līdz norādītajam maksimālajam garumam
@@ -178,7 +207,7 @@ def total(numbers):
     for i in numbers:
         summa = summa + i
     return summa
-numbers = [4, 5, 2, 5, 7, 8, 32]   
+
 
 def average(numbers):
     """
@@ -215,10 +244,8 @@ def average(numbers):
         skaits = skaits +1
     return summa / skaits
     
-numbers = [1, 2, 3, 4, 5]
-
 if __name__ == "__main__":
-    print("sanita".capitalize())
+    print("rĪGA".capitalize())
     print("truncate(šis teksts ir jāsaīsina līdz maksimums divdesmit simboliem, max_len=20)")
     print(truncate("šis teksts ir jāsaīsina līdz maksimums divdesmit simboliem", max_len=20))
     print(count_words("Saskaiti vārdus šajā garajā teikumā"))
@@ -230,5 +257,7 @@ if __name__ == "__main__":
     print(is_prime(13))
     print(factorial(4))
     print(factorial(5))
+    numbers = [4, 5, 2, 5, 7, 8, 32]   
     print(total(numbers))
+    numbers = [1, 2, 3, 4, 5]
     print(average(numbers))
