@@ -18,5 +18,45 @@
     "product": "Kartupeļi",
     "qty": 2,
     "price": 0.8
+  },
+  {
+    "product": "Konfektes",
+    "qty": 2,
+    "price": 7.58
+  },
+  {
+    "product": "Krējums",
+    "qty": 4,
+    "price": 1.53
+  },
+  {
+    "product": "Jogurts",
+    "qty": 2,
+    "price": 1.96
+  },
+  {
+    "product": "Piens",
+    "qty": 4,
+    "price": 1.18
+  },
+  {
+    "product": "Maize",
+    "qty": 2,
+    "price": 2.09
+  },
+  {
+    "product": "Piens",
+    "qty": 1,
+    "price": 1.18
+  },
+  {
+    "product": "Maize",
+    "qty": 1,
+    "price": 2.02
+  },
+  {
+    "product": "Piens",
+    "qty": 3,
+    "price": 1.18
   }
 ]

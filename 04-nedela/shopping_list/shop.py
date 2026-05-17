@@ -1,9 +1,40 @@
-from os import name
+
 import sys
-from storage import load_shopping_list, save_shopping_list
+from storage import (load_shopping_list, save_shopping_list, get_price, set_price)
 from utils import calc_line_total, calc_grand_total, count_units
 
-def add_item(product, qty, price):
+
+def ask_price():
+    while True:
+        try:
+            price = float(input("Ievadi cenu: "))
+            if price <= 0:
+                raise ValueError
+            return price
+        except ValueError:
+            print("Kļūda: cena jābūt pozitīvam skaitlim")
+
+def add_item(product, qty):
+    price = get_price(product)
+    
+    if price is not None:
+        print(f"Atrasta cena: {price:.2f} EUR/gab.")
+        choice = input("[A]kceptēt / [M]ainīt? ").strip().lower()
+
+        
+        if choice == "m":
+            price = ask_price()
+            set_price(product, price)
+            print(f"✓ Cena atjaunināta: {product} → {price:.2f} EUR")
+
+
+    else:
+        print("Cena nav zināma.")
+        price = ask_price()
+        set_price(product, price)
+        print(f"✓ Cena saglabāta: {product} ({price:.2f} EUR)")
+
+
     shopping_list = load_shopping_list()
     item = {"product": product, "qty": qty, "price": price}
 
@@ -43,7 +74,7 @@ def clear_list():
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         print("Lietošana:")
-        print("  python shop.py add <produkts> <daudzums> <cena>")
+        print("  python shop.py add <produkts> <daudzums>")
         print("  python shop.py list")
         print("  python shop.py total")
         print("  python shop.py clear")
@@ -52,8 +83,8 @@ if __name__ == "__main__":
     command = sys.argv[1]
 
     if command == "add":
-        if len(sys.argv) != 5:
-            print("Kļūda: add prasa 3 argumentus: nosaukums, daudzums, cena")
+        if len(sys.argv) != 4:
+            print("Kļūda: add prasa 2 argumentus: nosaukums, daudzums")
             sys.exit(1)
         product = sys.argv[2]
 
@@ -64,13 +95,7 @@ if __name__ == "__main__":
         except ValueError:
             print("Kļūda: daudzumam jābūt pozitīvam veselam skaitlim")
             sys.exit(1)
-
-        try:
-            price = float(sys.argv[4])
-        except ValueError:
-            print("Kļūda: cena nav skaitlis")
-            sys.exit(1)
-        add_item(product, qty, price)
+        add_item(product, qty)
 
     elif command == "list":
         list_shopping_list()
