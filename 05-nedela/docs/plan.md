@@ -2,36 +2,33 @@
 # Izdevumu izsekotājs – plāns
 
 ## A Programmas apraksts
-Programma ļauj ievadīt sistēmā veiktos pirkumus - pirkuma datumu, preču nosaukumu, cenu, daudzumu, kopā iztērēto naudu, kategoriju, kādā ietilpst konkrētais pirkums.
-Vēlāk no sistēmas var eksportēt uz csv failu dažāda  veida atskaites par to, kurā datumā kas nopirkts, cik daudz naudas iztērēts konkrētā mēnesī vai konkrētām preču kategorijām.
+Programma ļauj ievadīt sistēmā izdevumus - tēriņu datumu, kopā iztērēto summu, kategoriju, kādā ietilpst konkrētie izdevumi un pirkuma aprakstu.
+Vēlāk no sistēmas var eksportēt uz csv failu dažāda  veida atskaites par to, kurā datumā kas nopirkts, cik daudz naudas iztērēts konkrētā mēnesī vai pa konkrētām izdevumu kategorijām.
 
 ## B Datu struktūra
 Katrs izdevums būs vārdnīca ar:
 - datumu
-- preces nosaukumu
-- preces cenu
-- kopā iztērēto summu par konkrēto preci
-- preces kategoriju
+- kopā iztērēto summu
+- izdevumu kategoriju
+- pirkuma aprakstu (kas tieši nopirkts)
 
-{"date": "22.02.2025.","product": "Zefīrs","amount": 2.50,"price": 3.44,"category": "Saldumi"}
+{"date": "22.02.2025","amount": 3.88, "category": "Saldumi", "Description": Zefīri}
 
-Kopā pirkumu saraksts būs saraksts ar vairākām šādām vārdnīcām.
-Pirkumi: ({"date": "22.02.2025.","product": "Zefīrs","amount": 2.50,"price": 3.41,"category": "Saldumi"}, {"date": "13.05.2025.","product": "Kartupeļi","amount": 1.50,"price": 0.80,"category": "Pārtika"})
-
-
+Kopā izdevumu saraksts būs saraksts ar vairākām šādām vārdnīcām.
+Pirkumi: ({"date": "22.02.2025","amount": 3.88, "category": "Saldumi", "Description": "Zefīri"}, {"date": "29.05.2025","amount": 18.63, "category": "Higiēna", "Description": "Šampūns, zobu pasta, tualetes papīrs")
 
 piemēram: 
-22.12.2025. Saldējums 3 1.25 Saldumi
-02.02.2026. Elektrība 202 0.23 Komunālie maksājumi
+22.12.2025 1.34 Saldumi Saldējums
+02.02.2026 184.22 Komunālie maksājumi Elektrība 482 kW
 
-Izvēlējos šādu formu, jo man labāk patīk šāds datums, nekā uzdevumā ieteiktais YYYY.MM.DD, un tas ietver visus uzdevumā nepieciešamos kritērijus.
-Vārdnīca - jo konkrētā pirkumā nopirktas konkrētas lietas, kas pieder konkrētai kategorijai, par konkrētu cenu un konkrēts daudzums.
-Saraksts ar vārdnīcām - jo vienā reizē var tikt nopirktas dažādas preces.
+Izvēlējos šādu formu, jo man labāk patīk šāds datums, nekā uzdevumā ieteiktais YYYY-MM-DD.
+Izdevumi = vārdnīca - jo konkrētā datumā iztērēta konkrēta summa par konkrētām precēm, kas ietilpst konkrētā izdevumu kategorijā.
+Izdevumu saraksts = saraksts ar vārdnīcām - jo vienā reizē var tikt iztērēta nauda par dažādām preču kategorijām.
 
 ## C Moduļu plāns
 
 - app.py – lietotāja izvēlne - lietotājs pasaka, ko vēlas no programmas - vai ievadīt kādu informāciju, vai lai sistēma parāda kādu jau ievadīto informāciju.
-- storage.py – JSON faili - ielādē un saglabā tos.
+- storage.py – darbs ar JSON failiem - sistēma ielādē (nolasa) un saglabā (pārraksta) tos.
 - logic.py – filtrēšana, grupēšana un summas aprēķins - formulas.
 - export.py – eksportē datus uz CSV failu.
 - expenses.json - fails, kas izveidojas automātiski un saglabā izdevumu sarakstu
@@ -42,15 +39,15 @@ Saraksts ar vārdnīcām - jo vienā reizē var tikt nopirktas dažādas preces.
 - README.md - projekta dokumentācija
 
 ## D Lietotāja scenāriji
-Lietotājs ievada pirkumus, programma tos pārbauda, vai korekti ievadīti un saglabā json failā.
-Lietotājs filtrē ievadītos pirkumus pēc mēnešiem - prasa sistēmai parādīt, piem., tikai janvārī veiktos pirkumus - sistēma parāda sarakstu ar tikai janvārī veiktajiem pirkumiem.
+Lietotājs ievada izdevumus, programma tos pārbauda, vai korekti ievadīti un saglabā json failā.
+Lietotājs filtrē ievadītos izdevumus pēc mēnešiem - prasa sistēmai parādīt, piem., tikai janvārī veiktos pirkumus - sistēma parāda sarakstu ar tikai janvārī veiktajiem pirkumiem.
 Lietotājs prasa, lai sistēma izvada kopā par saldumiem iztērēto naudas summu - sistēma sarēķina, cik daudz naudas kopā iztērēts tieši saldumos un izvada kopsummu.
 Lietotājs eksportē CSV failu - pieprasītās atskaites iespējams atvērt ecxel failā.
 
 
 ## E Robežgadījumi
 - Ja expenses.json fails neeksistē, sistēma izvada tukšu pirkumu sarakstu: return[].
-- Ja lietotājs ievada negatīvu summu, sistēma izmet paziņojumu: "Daudzumam un cenai jābūt pozitīviem skaitļiem".
-- Ja lietotājs ievada tukšu aprakstu, sistēma izmet paziņojumu: "Ievadi pirkuma datumu, preces nosaukumu, cenu un kategoriju".
-- Ja lietotājs ievada nepareizu datumu, sistēma izmet paziņojumu: "Datums jāievada formātā: DD.MM.YYYY.".
-- Ja saraksts ir tukšs un lietotājs izvēlas "parādīt", tad sistēma izmet paziņojumu: "Pirkumu nav".
+- Ja lietotājs ievada negatīvu summu, sistēma izmet paziņojumu: "izdevumu summai jābūt pozitīvam skaitlim".
+- Ja lietotājs ievada tukšu aprakstu, sistēma izmet paziņojumu: "Ievadi izdevumu datumu, iztērēto summu, izdevumu kategoriju un aprakstu".
+- Ja lietotājs ievada nepareizu datumu, sistēma izmet paziņojumu: "Datums jāievada formātā: DD.MM.YYYY".
+- Ja saraksts ir tukšs un lietotājs izvēlas "parādīt", tad sistēma izmet paziņojumu: "Izdevumu nav".
