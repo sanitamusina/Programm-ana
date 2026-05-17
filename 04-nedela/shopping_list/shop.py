@@ -1,11 +1,16 @@
+from os import name
 import sys
 from storage import load_shopping_list, save_shopping_list
+from utils import calc_line_total, calc_grand_total, count_units
 
-def add_item(product, price):
+def add_item(product, qty, price):
     shopping_list = load_shopping_list()
-    shopping_list.append({"product": product, "price": price})
+    item = {"product": product, "qty": qty, "price": price}
+
+    shopping_list.append(item)
     save_shopping_list(shopping_list)
-    print(f"✓ Pievienots: {product} ({price:.2f} EUR)")
+    line_total = calc_line_total(item)
+    print(f"✓ Pievienots: {product} x {qty} " f"({price:.2f} EUR/gab.) = {line_total:.2f} EUR")
 
 def list_shopping_list():
     shopping_list = load_shopping_list()
@@ -14,13 +19,21 @@ def list_shopping_list():
         return
     print("Iepirkumu saraksts:")
     for i, item in enumerate(shopping_list, start=1):
-        print(f"{i}. {item['product']} — {item['price']:.2f} EUR}")
+        line_total = calc_line_total(item)
+        print(f"  {i}. {item['product']} × {item['qty']} - " f"{item['price']:.2f} EUR/gab. — {line_total:.2f} EUR")
+
 
 
 def total_sum():
     items = load_shopping_list()
-    total = sum(item["price"] for item in items)
-    print(f"Kopā: {total:.2f} EUR")
+    if not items:
+        print("Kopā: 0.00 EUR (0 vienības, 0 produkti)")
+        return
+    total = calc_grand_total(items)
+    units = count_units(items)
+    products = len(items)
+    print(f"Kopā: {total:.2f} EUR ({units} vienības, {products} produkti)")
+     
 
 
 def clear_list():
@@ -30,7 +43,7 @@ def clear_list():
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         print("Lietošana:")
-        print("  python shop.py add <produkts> <cena>")
+        print("  python shop.py add <produkts> <daudzums> <cena>")
         print("  python shop.py list")
         print("  python shop.py total")
         print("  python shop.py clear")
@@ -39,9 +52,25 @@ if __name__ == "__main__":
     command = sys.argv[1]
 
     if command == "add":
+        if len(sys.argv) != 5:
+            print("Kļūda: add prasa 3 argumentus: nosaukums, daudzums, cena")
+            sys.exit(1)
         product = sys.argv[2]
-        price = float(sys.argv[3])
-        add_item(product, price)
+
+        try:
+            qty = int(sys.argv[3])
+            if qty <= 0:
+                raise ValueError
+        except ValueError:
+            print("Kļūda: daudzumam jābūt pozitīvam veselam skaitlim")
+            sys.exit(1)
+
+        try:
+            price = float(sys.argv[4])
+        except ValueError:
+            print("Kļūda: cena nav skaitlis")
+            sys.exit(1)
+        add_item(product, qty, price)
 
     elif command == "list":
         list_shopping_list()

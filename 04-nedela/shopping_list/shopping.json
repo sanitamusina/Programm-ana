@@ -1,0 +1,22 @@
+[
+  {
+    "product": "Maize",
+    "qty": 3,
+    "price": 1.35
+  },
+  {
+    "product": "Desa",
+    "qty": 1,
+    "price": 4.07
+  },
+  {
+    "product": "Olas",
+    "qty": 30,
+    "price": 2.09
+  },
+  {
+    "product": "Kartupeļi",
+    "qty": 2,
+    "price": 0.8
+  }
+]
