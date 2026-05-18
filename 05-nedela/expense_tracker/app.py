@@ -13,8 +13,8 @@ def add_expense(expenses):
 
     if user_input:
         try:
-            d = datetime.strptime(user_input, "%d.%m.%Y")
-            stored_date = d.strftime("%Y-%m-%d")
+            data = datetime.strptime(user_input, "%d.%m.%Y")
+            stored_date = data.strftime("%Y-%m-%d")
         except ValueError:
             print("Kļūda: datums jāievada formātā DD.MM.YYYY")
             return
@@ -32,7 +32,9 @@ def add_expense(expenses):
 
     expenses.append({"date": stored_date, "amount": amount, "category": cat, "description": description})
     save_expenses(expenses)
-    print("✓ Izdevumi pievienoti")
+    
+    display_date = datetime.strptime(stored_date, "%Y-%m-%d").strftime("%d.%m.%Y")
+    print(f"✓ Pievienoti izdevumi ({display_date}, {amount:.2f} EUR, {cat}, {description})")
 
 def main():
     expenses = load_expenses()
