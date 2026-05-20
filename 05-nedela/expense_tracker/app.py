@@ -44,8 +44,23 @@ def main():
         if choice == "1":
             add_expense(expenses)
         elif choice == "2":
+            if not expenses:
+                print("Nav neviena izdevuma.")
+                continue
+
+            print(f"{'Datums':<12} | {'Summa (EUR)':>12} | {'Kategorija':<12} | Apraksts")
+            print("-" * 80)
+
             for expense in expenses:
-                print(expense)
+                date_raw = expense["date"]
+                amount = expense["amount"]
+                category = expense["category"]
+                description = expense["description"]
+
+                display_date = datetime.strptime(date_raw, "%Y-%m-%d").strftime("%d.%m.%Y")
+
+                print(f"{display_date:<12} | {amount:>12.2f} | {category:<12} | {description}")
+
         elif choice == "3":
             break
 

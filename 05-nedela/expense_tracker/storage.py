@@ -1,7 +1,7 @@
 import json
 import os
 
-FILE = "expense_tracker/expenses.json"
+FILE = "expenses.json"
 
 def load_expenses():
     if not os.path.exists(FILE):

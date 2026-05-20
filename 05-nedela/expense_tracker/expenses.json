@@ -1,0 +1,26 @@
+[
+  {
+    "date": "2025-04-30",
+    "amount": 44.91,
+    "category": "Higiēna",
+    "description": "šampūns, matu balzāms, dušas želeja, tualetes papīrs"
+  },
+  {
+    "date": "2025-06-19",
+    "amount": 2.94,
+    "category": "Ēdiens",
+    "description": "Desa"
+  },
+  {
+    "date": "2025-07-22",
+    "amount": 7.91,
+    "category": "Ēdiens",
+    "description": "Pusdienas Ezītī"
+  },
+  {
+    "date": "2025-01-29",
+    "amount": 205.0,
+    "category": "Veselība",
+    "description": "Zobu labošana"
+  }
+]
