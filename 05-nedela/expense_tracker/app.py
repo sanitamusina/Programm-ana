@@ -1,6 +1,9 @@
 from datetime import date, datetime
 from storage import load_expenses, save_expenses
 
+from logic import (get_available_months, filter_by_month, sum_by_category, delete_expense)
+
+
 CATEGORIES = ["Ēdiens", "Transports", "Izklaide", "Komunālie maksājumi", "Veselība", "Apģērbs un apavi", "Našķi", "Higiēna"]
 
 def add_expense(expenses):
@@ -39,7 +42,9 @@ def add_expense(expenses):
 def main():
     expenses = load_expenses()
     while True:
-        print("\n1) Pievienot\n2) Parādīt\n3) Iziet")
+        print("\n1) Pievienot\n2) Parādīt\n3) Filtrēt pēc mēneša\n4) Kopsavilkums pa kategorijām\n5) Dzēst izdevumu\n6) Iziet")
+        
+
         choice = input("> ")
         if choice == "1":
             add_expense(expenses)
@@ -47,6 +52,81 @@ def main():
             if not expenses:
                 print("Nav neviena izdevuma.")
                 continue
+
+        
+        elif choice == "3":
+            months = get_available_months(expenses)
+
+            if not months:
+                print("Nav izdevumu.")
+                continue
+
+            print("\nPieejamie mēneši:")
+            for i, m in enumerate(months, 1):
+                print(f"{i}) {m}")
+
+            sel = input("Izvēlies mēnesi: ")
+            if not sel.isdigit() or not (1 <= int(sel) <= len(months)):
+                print("Nepareiza izvēle.")
+                continue
+
+            month = months[int(sel) - 1]
+            filtered = filter_by_month(expenses, month)
+
+            print(f"\n{month} izdevumi:")
+            total = 0
+
+            for e in filtered:
+                total += e["amount"]
+                print(f'{e["date"]} | {e["amount"]:6.2f} EUR | {e["category"]:<12} | {e["description"]}')
+
+            print(f"Kopā: {total:.2f} EUR ({len(filtered)} ieraksti)")
+
+
+
+        elif choice == "4":
+            totals = sum_by_category(expenses)
+
+            if not totals:
+                print("Nav izdevumu.")
+                continue
+
+            print("\nKopsavilkums pa kategorijām:")
+            for cat, total in totals.items():
+                print(f"{cat:<12} | {total:8.2f} EUR")
+
+        elif choice == "5":
+            if not expenses:
+                print("Nav izdevumu, ko dzēst.")
+                continue
+  
+            print("\nIzdevumi:")
+            for i, e in enumerate(expenses, 1):
+                print(f'{i}) {e["date"]} | {e["amount"]:6.2f} EUR | {e["category"]:<12} | {e["description"]}')
+
+            sel = input("Kuru dzēst? (numurs vai 0 lai atceltu): ")
+
+            if sel == "0":
+                continue
+
+            if not sel.isdigit():
+                print("Nepareiza ievade.")
+                continue
+
+            idx = int(sel) - 1
+            deleted = delete_expense(expenses, idx)
+
+            if deleted is None:
+                print("Nepareizs numurs.")
+
+            else:
+                save_expenses(expenses)
+                print(f'✓ Dzēsts: {deleted["date"]} | {deleted["amount"]:.2f} EUR | {deleted["category"]} | {deleted["description"]}')
+
+
+
+
+
 
             print(f"{'Datums':<12} | {'Summa (EUR)':>12} | {'Kategorija':<12} | Apraksts")
             print("-" * 80)
@@ -66,3 +146,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
