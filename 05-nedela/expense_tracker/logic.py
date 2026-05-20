@@ -14,9 +14,7 @@ def get_available_months(expenses):
 
 
 def filter_by_month(expenses, year_month):
-    return [
-        e for e in expenses
-        if e["date
+    return [e for e in expenses if e["date"].startswith(year_month)]
 
 
 def sum_by_category(expenses):

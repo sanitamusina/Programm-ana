@@ -1,3 +1,4 @@
+print("RUNNING APP FROM:", __file__)
 from datetime import date, datetime
 from storage import load_expenses, save_expenses
 
@@ -48,12 +49,32 @@ def main():
         choice = input("> ")
         if choice == "1":
             add_expense(expenses)
+        
+       
         elif choice == "2":
+
             if not expenses:
                 print("Nav neviena izdevuma.")
+                input("Nospied Enter, lai atgrieztos izvēlnē...")
                 continue
 
-        
+            print()
+            print(f"{'Datums':<12} | {'Summa (EUR)':>12} | {'Kategorija':<16} | Apraksts")
+            print("-" * 80)
+
+            for expense in expenses:
+                date_raw = expense["date"]
+                amount = expense["amount"]
+                category = expense["category"]
+                description = expense["description"]
+
+                display_date = datetime.strptime(date_raw, "%Y-%m-%d").strftime("%d.%m.%Y")
+
+                print(f"{display_date:<12} | {amount:>12.2f} | {category:<16} | {description}")
+
+            print()
+     
+       
         elif choice == "3":
             months = get_available_months(expenses)
 
@@ -128,22 +149,8 @@ def main():
 
 
 
-            print(f"{'Datums':<12} | {'Summa (EUR)':>12} | {'Kategorija':<12} | Apraksts")
-            print("-" * 80)
-
-            for expense in expenses:
-                date_raw = expense["date"]
-                amount = expense["amount"]
-                category = expense["category"]
-                description = expense["description"]
-
-                display_date = datetime.strptime(date_raw, "%Y-%m-%d").strftime("%d.%m.%Y")
-
-                print(f"{display_date:<12} | {amount:>12.2f} | {category:<12} | {description}")
-
-        elif choice == "3":
+        elif choice == "6":
             break
 
 if __name__ == "__main__":
     main()
-

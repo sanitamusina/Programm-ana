@@ -6,12 +6,6 @@
     "description": "šampūns, matu balzāms, dušas želeja, tualetes papīrs"
   },
   {
-    "date": "2025-06-19",
-    "amount": 2.94,
-    "category": "Ēdiens",
-    "description": "Desa"
-  },
-  {
     "date": "2025-07-22",
     "amount": 7.91,
     "category": "Ēdiens",
@@ -22,5 +16,29 @@
     "amount": 205.0,
     "category": "Veselība",
     "description": "Zobu labošana"
+  },
+  {
+    "date": "2025-12-31",
+    "amount": 42.99,
+    "category": "Apģērbs un apavi",
+    "description": "Kleita"
+  },
+  {
+    "date": "2024-11-22",
+    "amount": 100.32,
+    "category": "Izklaide",
+    "description": "Avārijas brigādes apmeklējums"
+  },
+  {
+    "date": "2025-12-14",
+    "amount": 55.92,
+    "category": "Izklaide",
+    "description": "Cirks"
+  },
+  {
+    "date": "2025-01-11",
+    "amount": 4.22,
+    "category": "Ēdiens",
+    "description": "Salami desa"
   }
 ]
