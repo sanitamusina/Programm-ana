@@ -4,6 +4,7 @@ from storage import load_expenses, save_expenses
 
 from logic import (get_available_months, filter_by_month, sum_by_category, delete_expense)
 
+from export import export_to_csv
 
 CATEGORIES = ["Ēdiens", "Transports", "Izklaide", "Komunālie maksājumi", "Veselība", "Apģērbs un apavi", "Našķi", "Higiēna"]
 
@@ -43,7 +44,7 @@ def add_expense(expenses):
 def main():
     expenses = load_expenses()
     while True:
-        print("\n1) Pievienot\n2) Parādīt\n3) Filtrēt pēc mēneša\n4) Kopsavilkums pa kategorijām\n5) Dzēst izdevumu\n6) Iziet")
+        print("\n1) Pievienot\n2) Parādīt\n3) Filtrēt pēc mēneša\n4) Kopsavilkums pa kategorijām\n5) Dzēst izdevumu\n6) Eksportēt uz CSV\n7)Iziet")
         
 
         choice = input("> ")
@@ -150,6 +151,20 @@ def main():
 
 
         elif choice == "6":
+            if not expenses:
+                print("Nav izdevumu, ko eksportēt.")
+                input("Nospied Enter, lai turpinātu...")
+                continue
+           
+            filename = input("Faila nosaukums [izdevumi.csv]: ").strip()
+            if not filename.endswith(".csv"):
+                filename += ".csv"
+            if not filename:
+                filename = "izdevumi.csv"
+            count = export_to_csv(expenses, filename)
+            print(f"✓ Eksportēti {count} ieraksti uz {filename}")
+
+        elif choice == "7":
             break
 
 if __name__ == "__main__":
