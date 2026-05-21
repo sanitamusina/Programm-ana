@@ -15,7 +15,7 @@ Katrs izdevums būs vārdnīca ar:
 {"date": "22.02.2025","amount": 3.88, "category": "Saldumi", "Description": Zefīri}
 
 Kopā izdevumu saraksts būs saraksts ar vairākām šādām vārdnīcām.
-Pirkumi: ({"date": "22.02.2025","amount": 3.88, "category": "Saldumi", "Description": "Zefīri"}, {"date": "29.05.2025","amount": 18.63, "category": "Higiēna", "Description": "Šampūns, zobu pasta, tualetes papīrs")
+Pirkumi: ({"date": "22.02.2025","amount": 3.88, "category": "Saldumi", "Description": "Zefīri"}, {"date": "29.05.2025","amount": 18.63, "category": "Higiēna", "Description": "Šampūns, zobu pasta, tualetes papīrs"})
 
 piemēram: 
 22.12.2025 1.34 Saldumi Saldējums
