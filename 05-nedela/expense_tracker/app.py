@@ -1,4 +1,3 @@
-print("RUNNING APP FROM:", __file__)
 from datetime import date, datetime
 from storage import load_expenses, save_expenses
 
@@ -144,10 +143,6 @@ def main():
             else:
                 save_expenses(expenses)
                 print(f'✓ Dzēsts: {deleted["date"]} | {deleted["amount"]:.2f} EUR | {deleted["category"]} | {deleted["description"]}')
-
-
-
-
 
 
         elif choice == "6":

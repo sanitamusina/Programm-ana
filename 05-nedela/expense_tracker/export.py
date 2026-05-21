@@ -8,10 +8,10 @@ def export_to_csv(expenses, filename):
     with open(filename, "w", newline="", encoding="utf-8-sig") as file:
         writer = csv.writer(file)
 
-        # Galvene
+        # Kolonnu nosaukumi
         writer.writerow(["Datums", "Summa", "Kategorija", "Apraksts"])
 
-        # Ieraksti
+        # Ieraksti rindās
         for e in expenses:
             writer.writerow([e["date"], f"{e['amount']:.2f}", e["category"], e["description"]])
 
