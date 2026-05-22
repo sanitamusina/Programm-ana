@@ -40,5 +40,23 @@
     "amount": 4.22,
     "category": "Ēdiens",
     "description": "Salami desa"
+  },
+  {
+    "date": "2025-07-30",
+    "amount": 82.94,
+    "category": "Komunālie maksājumi",
+    "description": "Atrkitumu izvešana un karstais ūdens"
+  },
+  {
+    "date": "2025-11-22",
+    "amount": 34.66,
+    "category": "Našķi",
+    "description": "Kūkas un cepumi"
+  },
+  {
+    "date": "2025-04-11",
+    "amount": 30.44,
+    "category": "Higiēna",
+    "description": "Zobu birstes un zobu pastas"
   }
 ]

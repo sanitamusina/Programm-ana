@@ -59,22 +59,19 @@ def main():
                 continue
 
             print()
-            print(f"{'Datums':<12} | {'Summa (EUR)':>12} | {'Kategorija':<16} | Apraksts")
-            print("-" * 80)
+           
+            
+            for i, expense in enumerate(expenses, 1):
+                display_date = datetime.strptime(expense["date"], "%Y-%m-%d").strftime("%d.%m.%Y")
 
-            for expense in expenses:
-                date_raw = expense["date"]
-                amount = expense["amount"]
-                category = expense["category"]
-                description = expense["description"]
+            
+                print(f"{'Ieraksts':<15}: #{i}")
+                print(f"{'Datums':<15}: {display_date}")
+                print(f"{'Summa (EUR)':<15}: {expense['amount']:>10.2f}")
+                print(f"{'Kategorija':<15}: {expense['category']:<28.28}")
+                print(f"{'Apraksts':<15}: {expense['description']:<28.28}")
+                print("-" * 50)
 
-                display_date = datetime.strptime(date_raw, "%Y-%m-%d").strftime("%d.%m.%Y")
-
-                print(f"{display_date:<12} | {amount:>12.2f} | {category:<16} | {description}")
-
-            print()
-     
-       
         elif choice == "3":
             months = get_available_months(expenses)
 
@@ -99,7 +96,7 @@ def main():
 
             for e in filtered:
                 total += e["amount"]
-                print(f'{e["date"]} | {e["amount"]:6.2f} EUR | {e["category"]:<12} | {e["description"]}')
+                print(f'{e["date"]} | {e["amount"]:6.2f} EUR | {e["category"]:<22} | {e["description"]}')
 
             print(f"Kopā: {total:.2f} EUR ({len(filtered)} ieraksti)")
 
@@ -114,7 +111,7 @@ def main():
 
             print("\nKopsavilkums pa kategorijām:")
             for cat, total in totals.items():
-                print(f"{cat:<12} | {total:8.2f} EUR")
+                print(f"{cat:<22} | {total:8.2f} EUR")
 
         elif choice == "5":
             if not expenses:
@@ -123,7 +120,7 @@ def main():
   
             print("\nIzdevumi:")
             for i, e in enumerate(expenses, 1):
-                print(f'{i}) {e["date"]} | {e["amount"]:6.2f} EUR | {e["category"]:<12} | {e["description"]}')
+                print(f'{i}) {e["date"]} | {e["amount"]:6.2f} EUR | {e["category"]:<22} | {e["description"]}')
 
             sel = input("Kuru dzēst? (numurs vai 0 lai atceltu): ")
 
