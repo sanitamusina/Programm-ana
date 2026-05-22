@@ -19,6 +19,8 @@ Arī ar zaru izveidi un apvienošanu problēmu vairs nav, jo bija bieži jāliet
 Sākumā juka, kurā zarā man jābūt, lai apvienotu zarus un arī kurā mapē man jābūt, lai veiktu commitu.
 pwd un cd komandas arī apguvu ātri.
 kopumā 2.solī izveidoju app.py failu ar komandām (te interpretēju ar savu datuma izskatu, iemācījos, kā ar \n vai trīskāršajām pēdiņām sadalīt tekstu rindās, kā ar <12 izlīdzināt tekstu pa labi vai kreisi un ielikt teksta platumu), un storage.py (te iemācījos, ka, lai darbotos latviešu alfabēta burti, jāliek encoding="utf-8 un w lieto saglabāšanai un r atvēršnai. jaunums te bija arī import komandas)
+Visvairāk laika - aptuveni 4 h (diemžēl tā arī bez rezultātiem) pavadīju mēģinot pie 2.izvēlnes panākt, ka komunālo maksājumu rinda neizbīdās, bet ir vienā platumā ar pārējām. Te ne Copilot, ne chatGPT man nespēja sniegt pareizu kodu, lai šo problēmu atrisinātu. Loģiski likās, ka ievadot ciparu, kas krietni pārsniedz nepieciešamo zīmju skaitu, vajadzētu visam strādāt, bet nekā. izmēģināju vairākus kodu variantus, rezultāts - nemainīgs. Šo problēmu tā arī neatrisināju un labprāt uzzinātu, kur bija problēma.
+
 
 ## 3. solis: Filtrēšana, kopsavilkums un dzēšana
 izveidoju logic.py failu ar komandām. Šajā solī nebija nekas īpaši sarežģīts (ja neskaita pašu kodu, ko man palīdzēja ģenerēt AI) un neko īpaši jaunu arī neiemācījos.
